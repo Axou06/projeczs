@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page avec des étoiles brillantes</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="star-canvas"></canvas>
+  <h1 style="text-align: center;">Bienvenue sur ma page étoilée !</h1>
+  
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('star-canvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Dimensions du canvas
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      // Création de l'effet d'étoiles brillantes
+      function createStar() {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const radius = Math.random() * 3;
+        const opacity = Math.random();
+        
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+        ctx.fill();
+      }
+      
+      // Animation des étoiles
+      function animateStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        for (let i = 0; i < 100; i++) {
+          createStar();
+        }
+        
+        requestAnimationFrame(animateStars);
+      }
+      
+      animateStars();
+    });
+  </script>
+</body>
+</html>
